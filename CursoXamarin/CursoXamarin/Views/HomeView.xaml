@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CursoXamarin.Views.HomeView">
+    <ContentPage.Content>
+
+        <!--Doctors List-->
+        <StackLayout>
+
+            <ListView ItemsSource="{Binding lstDoctors}">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+
+
+                        <ImageCell TextColor="#9B9B9B"
+                                   Text="{Binding FirstName}"
+                                   Detail="{Binding LastName}"
+                                   ImageSource="{Binding Icon}"/>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </StackLayout>
+
+        
+    </ContentPage.Content>
+</ContentPage>
