@@ -19,13 +19,21 @@
                 <StackLayout Padding="40"
                              Spacing="20"
                              VerticalOptions="End">
-
-                    <Entry Placeholder="Email Address"/>
-                    <Entry Placeholder="Password"
+                    <Entry Text="{Binding User.Email}"
+                           Placeholder="Email Address"/>
+                    <Entry Text="{Binding User.Password}"
+                           Placeholder="Password"
                            IsPassword="True"/>
 
-                    <Button Text="LOGIN"
-                            TextColor="#00CDD9"/>
+                    <Button  Text="LOGIN"
+                             Command="{Binding LoginCommand}"
+                             TextColor="#00CDD9"/>
+
+                    <Label Text="Crear Cuenta">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EnterRegisterCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
 
                 </StackLayout>
 

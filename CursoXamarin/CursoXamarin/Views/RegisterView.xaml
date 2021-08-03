@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CursoXamarin.Views.RegisterView">
+    <ContentPage.Content>
+        <StackLayout Margin="0,60">
+            <!--Name-->
+             <StackLayout Padding="10"
+                          Orientation="Horizontal">
+                <Label Text="Nombre:"
+                       VerticalOptions="Center"/>
+                <Entry Text=""
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <!--Last Name-->
+             <StackLayout Padding="10"
+                          Orientation="Horizontal">
+                <Label Text="Apellido:"
+                       VerticalOptions="Center"/>
+                <Entry Text=""
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <!--Last Name-->
+             <StackLayout Padding="10"
+                          Orientation="Horizontal">
+                <Label Text="Telefono:"
+                       VerticalOptions="Center"/>
+                <Entry Text=""
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+             <!--Email-->
+             <StackLayout Padding="10"
+                          Orientation="Horizontal">
+                <Label Text="Email:"
+                       VerticalOptions="Center"/>
+                <Entry Text=""
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+
+        <Button Text="Volver a Login"
+                Command="{Binding ExitRegisterCommand}"/>
+        </StackLayout>
+        <!--Campos de registro-->
+
+       
+        
+    </ContentPage.Content>
+</ContentPage>

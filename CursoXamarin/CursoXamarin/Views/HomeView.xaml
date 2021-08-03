@@ -13,12 +13,13 @@
                 <ListView.ItemTemplate>
 
                     <DataTemplate>
-
-
-                        <ImageCell TextColor="#9B9B9B"
-                                   Text="{Binding FirstName}"
-                                   Detail="{Binding LastName}"
-                                   ImageSource="{Binding Icon}"/>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding FirstName}"/>
+                            </StackLayout>
+                        </ViewCell>
+                     
+                        
 
                     </DataTemplate>
 

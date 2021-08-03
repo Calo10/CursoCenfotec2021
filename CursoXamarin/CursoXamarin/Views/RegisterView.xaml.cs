@@ -5,13 +5,13 @@ using Xamarin.Forms;
 
 namespace CursoXamarin.Views
 {
-    public partial class MenuView : ContentPage
+    public partial class RegisterView : ContentPage
     {
-        public MenuView()
+        public RegisterView()
         {
             InitializeComponent();
 
-            BindingContext = new MenuViewModel();
+            BindingContext = new LoginViewModel();
         }
     }
 }
