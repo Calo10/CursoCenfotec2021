@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace CursoXamarin.Views
 {
-    public partial class HomeView : ContentPage
+    public partial class DetailDoctorView : ContentPage
     {
-        public HomeView()
+        public DetailDoctorView()
         {
             InitializeComponent();
 

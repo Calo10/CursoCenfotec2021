@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 using CursoXamarin.Models;
+using CursoXamarin.Views;
+using Xamarin.Forms;
 
 namespace CursoXamarin.ViewModels
 {
@@ -24,16 +28,72 @@ namespace CursoXamarin.ViewModels
             }
         }
 
+        private DoctorModel _CurrentDoctor = new DoctorModel();
+
+        public DoctorModel CurrentDoctor
+        {
+            get
+            {
+                return _CurrentDoctor;
+            }
+            set
+            {
+                _CurrentDoctor = value;
+                OnPropertyChanged("CurrentDoctor");
+            }
+        }
+
         #endregion
 
+        #region Commands
 
+        public ICommand EnterDoctorDetailCommand { get; set; }
 
+        #endregion
 
-        public HomeViewModel()
+        #region Singleton
+
+        private static HomeViewModel instance = null;
+
+        private HomeViewModel()
         {
-            lstDoctors.Add(new DoctorModel { Id = "1", FirstName = "Joe", LastName = "Doe", Icon = "https://eshendetesia.com/images/user-profile.png" });
-            lstDoctors.Add(new DoctorModel { Id = "2", FirstName = "Nat", LastName = "Men", Icon = "" });
-            lstDoctors.Add(new DoctorModel { Id = "3", FirstName = "Sof", LastName = "Bar", Icon = "https://image.flaticon.com/icons/png/512/219/219990.png" });
+            InitClass();
+            InitCommand();
+        }
+
+        public static HomeViewModel GetInstance()
+        {
+            if (instance == null)
+                instance = new HomeViewModel();
+
+            return instance;
+        }
+
+        public static void DeleteInstance()
+        {
+            if (instance != null)
+                instance = null;
+        }
+
+        #endregion
+
+        public async void InitClass()
+        {
+            lstDoctors = await DoctorModel.GetAllDoctors();
+        }
+
+        public void InitCommand()
+        {
+            EnterDoctorDetailCommand = new Command<DoctorModel>(EnterDoctorDetail);
+        }
+
+
+        public void EnterDoctorDetail(DoctorModel doctor)
+        {
+            //CurrentDoctor = lstDoctors.Where(x => x.Id == doctor.Id).FirstOrDefault();
+            CurrentDoctor = doctor;
+
+            ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DetailDoctorView());
         }
 
 
