@@ -48,6 +48,7 @@ namespace CursoXamarin.ViewModels
         #region Commands
 
         public ICommand EnterDoctorDetailCommand { get; set; }
+        public ICommand EnterPostCommand { get; set; }
 
         #endregion
 
@@ -85,15 +86,23 @@ namespace CursoXamarin.ViewModels
         public void InitCommand()
         {
             EnterDoctorDetailCommand = new Command<DoctorModel>(EnterDoctorDetail);
+            EnterPostCommand = new Command<string>(EnterPost);
         }
 
 
-        public void EnterDoctorDetail(DoctorModel doctor)
+        public async void EnterDoctorDetail(DoctorModel doctor)
         {
             //CurrentDoctor = lstDoctors.Where(x => x.Id == doctor.Id).FirstOrDefault();
-            CurrentDoctor = doctor;
+            CurrentDoctor = await DoctorModel.GetDetailDoctor(doctor.Id);
+
 
             ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DetailDoctorView());
+        }
+
+
+        public void EnterPost(string id)
+        {
+            ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new PostView(id));
         }
 
 

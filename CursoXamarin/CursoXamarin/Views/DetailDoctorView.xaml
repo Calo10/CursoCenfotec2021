@@ -8,6 +8,17 @@
              <Image Source="{Binding CurrentDoctor.Picture}"/>
              <Label FontSize="Title"
                    Text="{Binding CurrentDoctor.FirstName}"/>
+
+            <Label FontSize="Title"
+                   Text="{Binding CurrentDoctor.Location.Street}"/>
+            <Label FontSize="Title"
+                   Text="{Binding CurrentDoctor.Phone}"/>
+            <Label FontSize="Title"
+                   Text="{Binding CurrentDoctor.Email}"/>
+
+            <Button Text="VER POST" Command="{Binding EnterPostCommand}"
+                    CommandParameter="{Binding CurrentDoctor.Id}"/>
+
         </StackLayout>
        
     </ContentPage.Content>
