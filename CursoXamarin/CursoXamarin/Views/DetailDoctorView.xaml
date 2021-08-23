@@ -14,10 +14,12 @@
             <Label FontSize="Title"
                    Text="{Binding CurrentDoctor.Phone}"/>
             <Label FontSize="Title"
-                   Text="{Binding CurrentDoctor.Email}"/>
+                   Text="{Binding CurrentDoctor.Email}"/> 
 
             <Button Text="VER POST" Command="{Binding EnterPostCommand}"
                     CommandParameter="{Binding CurrentDoctor.Id}"/>
+
+            <Button Text="VER DIRECCION" Command="{Binding ShowLocationCommand}"/>
 
         </StackLayout>
        

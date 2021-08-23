@@ -12,6 +12,7 @@ namespace CursoXamarin
             InitializeComponent();
 
             MainPage = new LoginView();
+
         }
 
         protected override void OnStart()
@@ -25,5 +26,7 @@ namespace CursoXamarin
         protected override void OnResume()
         {
         }
+
+     
     }
 }

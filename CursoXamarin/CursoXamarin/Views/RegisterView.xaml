@@ -5,12 +5,12 @@
     x:Class="CursoXamarin.Views.RegisterView">
     <ContentPage.Content>
         <StackLayout Margin="0,60">
-            <!--Name-->
+            <!--First Name-->
              <StackLayout Padding="10"
                           Orientation="Horizontal">
                 <Label Text="Nombre:"
                        VerticalOptions="Center"/>
-                <Entry Text=""
+                <Entry Text="{Binding User.FirstName}"
                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <!--Last Name-->
@@ -18,15 +18,15 @@
                           Orientation="Horizontal">
                 <Label Text="Apellido:"
                        VerticalOptions="Center"/>
-                <Entry Text=""
+                <Entry Text="{Binding User.LastName}"
                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <!--Last Name-->
+            <!--Cellpholne-->
              <StackLayout Padding="10"
                           Orientation="Horizontal">
                 <Label Text="Telefono:"
                        VerticalOptions="Center"/>
-                <Entry Text=""
+                <Entry Text="{Binding User.Cellphone}"
                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
              <!--Email-->
@@ -34,15 +34,26 @@
                           Orientation="Horizontal">
                 <Label Text="Email:"
                        VerticalOptions="Center"/>
-                <Entry Text=""
+                <Entry Text="{Binding User.Email}"
+                       HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <!--Password-->
+             <StackLayout Padding="10"
+                          Orientation="Horizontal">
+                <Label Text="Password:"
+                       VerticalOptions="Center"/>
+                <Entry Text="{Binding User.Password}"
+                       IsPassword="True"
                        HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
+            <Button Text="CREAR CUENTA"
+                Command="{Binding RegisterCommand}"/>
 
-        <Button Text="Volver a Login"
+            <Button Text="Volver a Login"
                 Command="{Binding ExitRegisterCommand}"/>
         </StackLayout>
-        <!--Campos de registro-->
+  
 
        
         

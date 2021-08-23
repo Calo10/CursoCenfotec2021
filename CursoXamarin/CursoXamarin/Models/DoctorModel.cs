@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Realms;
 
 namespace CursoXamarin.Models
 {
-    public class DoctorModel
+    public class DoctorModel 
     {
         public string Id { get; set; }
         public string Title { get; set; }
@@ -29,9 +30,9 @@ namespace CursoXamarin.Models
         {
             using (HttpClient client = new HttpClient())
             {
-                var uri = new Uri("https://dummyapi.io/data/api/user");
+                var uri = new Uri("https://dummyapi.io/data/v1/user");
 
-                client.DefaultRequestHeaders.Add("app-id", "5fad867bca750f4fc7508473");
+                client.DefaultRequestHeaders.Add("app-id", "611c4fcfb585ebe870ba6568");
 
                 HttpResponseMessage response = await client.GetAsync(uri).ConfigureAwait(false);
 
@@ -47,9 +48,9 @@ namespace CursoXamarin.Models
         {
             using (HttpClient client = new HttpClient())
             {
-                var uri = new Uri("https://dummyapi.io/data/api/user/" + id);
+                var uri = new Uri("https://dummyapi.io/data/v1/user/" + id);
 
-                client.DefaultRequestHeaders.Add("app-id", "5fad867bca750f4fc7508473");
+                client.DefaultRequestHeaders.Add("app-id", "611c4fcfb585ebe870ba6568");
 
                 HttpResponseMessage response = await client.GetAsync(uri).ConfigureAwait(false);
 

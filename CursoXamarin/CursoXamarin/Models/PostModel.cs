@@ -19,9 +19,9 @@ namespace CursoXamarin.Models
         {
             using (HttpClient client = new HttpClient())
             {
-                var uri = new Uri("https://dummyapi.io/data/api/user/" + id + "/post");
+                var uri = new Uri("https://dummyapi.io/data/v1/user/" + id + "/post");
 
-                client.DefaultRequestHeaders.Add("app-id", "5fad867bca750f4fc7508473");
+                client.DefaultRequestHeaders.Add("app-id", "611c4fcfb585ebe870ba6568");
 
                 HttpResponseMessage response = await client.GetAsync(uri).ConfigureAwait(false);
 

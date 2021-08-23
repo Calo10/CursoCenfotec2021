@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using CursoXamarin.Models;
 using CursoXamarin.Views;
+using Realms;
 using Xamarin.Forms;
 
 namespace CursoXamarin.ViewModels
@@ -33,6 +35,7 @@ namespace CursoXamarin.ViewModels
         public ICommand LoginCommand { get; set; }
         public ICommand EnterRegisterCommand { get; set; }
         public ICommand ExitRegisterCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
 
         #endregion
 
@@ -42,6 +45,43 @@ namespace CursoXamarin.ViewModels
             LoginCommand = new Command(Login);
             EnterRegisterCommand = new Command(EnterRegister);
             ExitRegisterCommand = new Command(ExitRegister);
+            RegisterCommand = new Command(Register);
+        }
+
+        public async void Register()
+        {
+            try
+            {
+                var realm = Realm.GetInstance();
+
+                var users = realm.All<UserModel>();
+
+                //Dar un consecutivo
+                User.Id = users.Count() + 1;
+
+                realm.Write(() =>
+                {
+                    realm.Add(User);
+                });
+
+                Clean();
+
+                await App.Current.MainPage.DisplayAlert("Success", "User created successfully", "OK");
+
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Login error: " + ex.Message, "OK");
+            }
+            finally
+            {
+                App.Current.MainPage = new LoginView();
+            }
+        }
+
+        private void Clean()
+        {
+            User = new UserModel();
         }
 
         public async void EnterRegister()
@@ -58,21 +98,31 @@ namespace CursoXamarin.ViewModels
         {
             try
             {
-                if(User.Email.ToLower() == "test@test.com" && User.Password == "abc123")
+                var realm = Realm.GetInstance();
+
+                var dbUser = realm.All<UserModel>().Where(u => u.Email == User.Email).FirstOrDefault();
+
+                if (dbUser == null)
                 {
-                    //Application.Current.MainPage = new HomeView();
-
-                    NavigationPage navigation = new NavigationPage(new HomeView());
-
-                    Application.Current.MainPage = new MasterDetailPage
-                    {
-                        Master = new MenuView() ,
-                        Detail = navigation
-                    };
+                    await Application.Current.MainPage.DisplayAlert("Info", "User not exist", "OK");
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Wrong Credentials", "OK");
+                    if (User.Password == dbUser.Password)
+                    {
+
+                        NavigationPage navigation = new NavigationPage(new HomeView());
+
+                        Application.Current.MainPage = new MasterDetailPage
+                        {
+                            Master = new MenuView(),
+                            Detail = navigation
+                        };
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Wrong Credentials", "OK");
+                    }
                 }
             }
             catch (Exception ex)

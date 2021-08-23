@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using CursoXamarin.Models;
 using CursoXamarin.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CursoXamarin.ViewModels
@@ -49,6 +50,7 @@ namespace CursoXamarin.ViewModels
 
         public ICommand EnterDoctorDetailCommand { get; set; }
         public ICommand EnterPostCommand { get; set; }
+        public ICommand ShowLocationCommand { get; set; }
 
         #endregion
 
@@ -87,8 +89,27 @@ namespace CursoXamarin.ViewModels
         {
             EnterDoctorDetailCommand = new Command<DoctorModel>(EnterDoctorDetail);
             EnterPostCommand = new Command<string>(EnterPost);
+            ShowLocationCommand = new Command(ShowLocation);
         }
 
+        public async void ShowLocation()
+        {
+
+            //PENDIENTE: Llamar al API google para convertir location en lat y lon
+
+            var location = new Location(10.0153982, -84.1116768);
+            var options = new MapLaunchOptions { Name = CurrentDoctor.FirstName };
+
+            
+            try
+            {
+                await Map.OpenAsync(location, options);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error: " + ex.Message, "OK");
+            }
+        }
 
         public async void EnterDoctorDetail(DoctorModel doctor)
         {
