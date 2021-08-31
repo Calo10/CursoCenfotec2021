@@ -33,6 +33,7 @@ namespace CursoXamarin.ViewModels
         #region Command
 
         public ICommand LogoutCommand { get; set; }
+        public ICommand EnterMenuOptionCommand { get; set; }
 
         #endregion
 
@@ -40,14 +41,35 @@ namespace CursoXamarin.ViewModels
         public MenuViewModel()
         {
             LogoutCommand = new Command(Logout);
+            EnterMenuOptionCommand = new Command<int>(EnterMenuOption);
 
-            lstMenu.Add(new MenuModel { Name = "Especialidades", Icon = "" });
-            lstMenu.Add(new MenuModel { Name = "Contacto", Icon = "" });
+            lstMenu.Add(new MenuModel { Id = 1, Name = "Especialidades", Icon = "" });
+            lstMenu.Add(new MenuModel { Id = 2, Name = "Contacto", Icon = "" });
+            lstMenu.Add(new MenuModel { Id = 3, Name = "Mapa", Icon = "" });
         }
 
         public async void Logout()
         {
             App.Current.MainPage = new LoginView();
+        }
+
+        public async void EnterMenuOption(int id)
+        {
+            switch (id)
+            {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MapView());
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         #region PropertyChangedImplementation
