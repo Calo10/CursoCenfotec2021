@@ -5,20 +5,18 @@ namespace CursoXamarin.Views.Behavior
 {
     public class BindableBehavior<T> : Behavior<T> where T : BindableObject
     {
-
         public T AssociatedObject { get; private set; }
 
-
-        protected override void OnAttachedTo(T bindable)
+        protected override void OnAttachedTo(T visualElement)
         {
-            base.OnAttachedTo(bindable);
+            base.OnAttachedTo(visualElement);
 
-            AssociatedObject = bindable;
+            AssociatedObject = visualElement;
 
-            if (bindable.BindingContext != null)
-                BindingContext = bindable.BindingContext;
+            if (visualElement.BindingContext != null)
+                BindingContext = visualElement.BindingContext;
 
-            bindable.BindingContextChanged += OnBindingContextChanged;
+            visualElement.BindingContextChanged += OnBindingContextChanged;
         }
 
         private void OnBindingContextChanged(object sender, EventArgs e)
@@ -26,9 +24,9 @@ namespace CursoXamarin.Views.Behavior
             OnBindingContextChanged();
         }
 
-        protected override void OnDetachingFrom(T bindable)
+        protected override void OnDetachingFrom(T view)
         {
-            bindable.BindingContextChanged -= OnBindingContextChanged;
+            view.BindingContextChanged -= OnBindingContextChanged;
         }
 
         protected override void OnBindingContextChanged()

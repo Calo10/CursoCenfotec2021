@@ -66,6 +66,8 @@ namespace CursoXamarin.ViewModels
                 case 3:
                     await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MapView());
 
+                    ((MasterDetailPage)App.Current.MainPage).IsPresented = false;
+
                     break;
                 default:
                     break;
