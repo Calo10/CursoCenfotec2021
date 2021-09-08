@@ -46,6 +46,7 @@ namespace CursoXamarin.ViewModels
             lstMenu.Add(new MenuModel { Id = 1, Name = "Especialidades", Icon = "" });
             lstMenu.Add(new MenuModel { Id = 2, Name = "Contacto", Icon = "" });
             lstMenu.Add(new MenuModel { Id = 3, Name = "Mapa", Icon = "" });
+            lstMenu.Add(new MenuModel { Id = 4, Name = "Chat", Icon = "" });
         }
 
         public async void Logout()
@@ -65,6 +66,13 @@ namespace CursoXamarin.ViewModels
                     break;
                 case 3:
                     await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MapView());
+
+                    ((MasterDetailPage)App.Current.MainPage).IsPresented = false;
+
+                    break;
+
+                case 4:
+                    await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ChatView());
 
                     ((MasterDetailPage)App.Current.MainPage).IsPresented = false;
 

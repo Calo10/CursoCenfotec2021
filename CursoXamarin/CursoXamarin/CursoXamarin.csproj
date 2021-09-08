@@ -25,6 +25,9 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Behavior\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Views\Cells\" />
+    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
