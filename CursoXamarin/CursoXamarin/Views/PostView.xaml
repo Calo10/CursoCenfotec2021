@@ -7,6 +7,10 @@
     <StackLayout BackgroundColor="#c9fcf8"
                      Padding="20">
 
+        <Image Source="{Binding ImageSource}"/>
+
+        <Button Text="TAKE PICTURE" Command="{Binding TakePhotoCommand}"/>
+
         <ListView ItemsSource="{Binding lstPost}"
                       BackgroundColor="Transparent"
                       SeparatorVisibility="None"

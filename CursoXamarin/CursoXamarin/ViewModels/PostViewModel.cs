@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using CursoXamarin.Models;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace CursoXamarin.ViewModels
 {
@@ -24,12 +27,50 @@ namespace CursoXamarin.ViewModels
             }
         }
 
+        private ImageSource _ImageSource;
+        public ImageSource ImageSource
+        {
+            get { return _ImageSource; }
+
+            set
+            {
+                _ImageSource = value;
+                OnPropertyChanged("ImageSource");
+            }
+        }
+
+        public ICommand TakePhotoCommand { get; set; }
+
         #endregion
 
 
         public PostViewModel(string id)
         {
             FillPost(id);
+
+            TakePhotoCommand = new Command(TakePhoto);
+          
+        }
+
+        public async void TakePhoto()
+        {
+            try
+            {
+                var photo = await MediaPicker.CapturePhotoAsync();
+
+                if (photo == null)
+                {
+                    return;
+                }
+
+                ImageSource = photo.FullPath;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
 
         public async void FillPost(string id)
